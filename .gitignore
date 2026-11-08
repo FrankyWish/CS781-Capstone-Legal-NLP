@@ -1,0 +1,29 @@
+# data, checkpoints, caches and submission archives live on Google Drive, not in git
+*.zip
+*.pt
+*.bin
+*.npz
+*.pkl
+*.parquet
+*.jsonl
+__pycache__/
+results/
+logs/
+cache/
+external/
+
+# organiser material (specification, official scorers, starter notebook)
+spec/
+tools/evaluators/
+
+# abandoned first Phase-1 attempt (5 GB of runs)
+phase1/archive/
+
+# internal planning notes and assistant prompts, not documentation
+**/PROMPT.md
+**/REDESIGN_PROMPT.md
+**/HANDOFF.md
+**/SUBMISSION_PLAN.md
+
+# leaderboard screenshot shows other participants' usernames
+phase6/leaderboard_final.png

@@ -1,0 +1,7 @@
+# Dependencies for the official local evaluators (from requirements.docx).
+# cs781_submit.py itself needs none of these -- it is standard library only.
+numpy
+scikit-learn
+rouge-score
+bert-score
+torch

@@ -1,0 +1,37 @@
+Phase 5 (LSI) - Codabench upload order
+=======================================
+Each .zip here contains exactly one file, prediction.json, at the zip root.
+That is the format phase5_data.py asserts (code/phase5_data.py:317).
+
+DO NOT upload the *-20261026T*-1-001.zip files sitting loose in Downloads.
+Those are Google Drive folder wrappers: their contents sit under <tag>/...,
+so Codabench would not find prediction.json at the root. All 13 would have
+scored 0 or errored out, burning 13 slots.
+
+Cap is 10/day, 40/phase. The order below front-loads the grading requirements
+(LoRMA, KD, all four Phase-1 architectures, 5 techniques) into the first 10,
+per SUBMISSION_PLAN.md - this is NOT pure best-score order, deliberately.
+
+ #  file                      type        dev MacroF1  CV      covers
+ 1  01_ens_hyb_z.zip          HYBRID      0.4432       0.4245  best score
+ 2  02_ens_model.zip          model-only  0.4065       0.3948  best model-only
+ 3  03_top_M1_adapter.zip     model-only  0.3943       0.3823  best single model
+ 4  04_m4_lorma.zip           model-only  0.3626       0.3465  LoRMA (compulsory), M4
+ 5  05_kd_m4half.zip          model-only  0.3569       0.3440  KD (compulsory)
+ 6  06_m1_adapter.zip         model-only  0.3735       0.3628  Adapters, M1
+ 7  07_m3_qlora.zip           model-only  0.3704       0.3589  QLoRA, M3
+ 8  08_m2_partial.zip         model-only  0.3490       0.3373  Partial FT, M2
+ 9  09_m1_prefix.zip          model-only  0.3511       0.3382  Prefix tuning
+10  10_ens_hyb.zip            HYBRID      0.4245       0.4239  prob averaging
+--- first 10 = every grading requirement met; below are day-2 extras ---
+11  11_lex_silver.zip         HYBRID      0.4224       0.4079  TF-IDF + silver
+12  12_lex_perlabel.zip       HYBRID      0.4210       0.4044  TF-IDF per-label thr
+13  13_lex_global.zip         HYBRID      0.4033       0.4012  TF-IDF global thr
+
+Leaderboard keeps the best score, so order only decides which shows first -
+but order decides EVERYTHING if the 10/day cap cuts the run short.
+
+WARNING: SUBMISSION_PLAN.md and EXPERIMENTS.md both record the Phase 5 window
+as 2026-10-22 to 2026-10-26 23:59 IST. That closed the night before these were
+staged (today is 2026-10-27). Check whether the phase still accepts uploads
+before spending time on this.
