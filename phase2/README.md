@@ -5,7 +5,7 @@ R.COUNSEL, STAT, PREC, CASENO, DATE, WIT, AUTH) as exact character spans in full
 70 training documents (organiser folds 1 and 2, 8,393 entities), 35 test documents (fold 3).
 Metric: **strict** Macro-F1 over the 12 labels; a span one character off scores zero.
 
-**Result.** Rank 6 at **0.6515** (P 0.6252, R 0.6835), `submission_r3_rescue.zip`. Best
+**Result.** Rank 7 at **0.6515** (P 0.6252, R 0.6835), `submission_r3_rescue.zip`. Best
 model-only system: 0.4873 (`ext6`, an ensemble of fine-tuned Phase-1 trunks with InLegalNER
 added). Everything between those two numbers is combination of systems, boundary
 post-processing and measured domain rules.

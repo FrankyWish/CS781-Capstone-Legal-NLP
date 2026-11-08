@@ -13,7 +13,7 @@ The data is IL-TUR `lsi`; its public test split was never downloaded.
 | `ens_model`: greedy average of the neural runs | Phase-1 models only | 0.3949 |
 | `ens_hyb`: neural + TF-IDF, probability average | hybrid | 0.4387 |
 | `s6_bag`: stacker, mean of 8 seeds (the honest method number) | hybrid | **0.4622** |
-| `s5_s1`: one stacker seed, best of 13 uploaded | hybrid | **0.4632**, rank 5 (graded entry) |
+| `s5_s1`: one stacker seed, best of 13 uploaded | hybrid | **0.4632**, rank 6 (graded entry) |
 
 The 0.4632 is the best of 13 seeds whose test scores spread 0.4551 to 0.4632, so it includes
 leaderboard selection; 0.4622 is the method's number.

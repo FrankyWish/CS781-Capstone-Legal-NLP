@@ -10,7 +10,7 @@ cases (41% positive), 994 real dev cases, 1,517 test cases. Metric: Macro-F1 ove
 |---|---|---|
 | `ens_w_m`: three M4 LoRMA runs, equal-weight mean | Phase-1 model only | **0.7225** |
 | `ens_w_b`: two M4 runs + whole-judgment TF-IDF with silver data | genuine hybrid | **0.7488** |
-| `ret_m4_spread8`: corpus lookup of the case's own order (55.8% of cases) + M4 elsewhere | lookup | **0.8767**, rank 1 of 101 (graded entry) |
+| `ret_m4_spread8`: corpus lookup of the case's own order (55.8% of cases) + M4 elsewhere | lookup | **0.8767**, rank 2 (graded entry) |
 | `ret_ens_w_b_w600t2`: tier-2 lookup (87.6% of cases) + `ens_w_b` | lookup | 0.9598 |
 
 The lookup rows read each test case's removed final order from its copy in the permitted

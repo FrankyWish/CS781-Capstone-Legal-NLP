@@ -14,7 +14,7 @@ Macro-F1 over the 13 labels.
 | `lora_M4_lsegall`: M4 after LegalSeg intermediate training, LoRA r16 | Phase-1 model only | **0.5637** |
 | `v54`: 8-member ensemble incl. a TF-IDF model, transition decoding | genuine hybrid | **0.5845** |
 | `v46`: 3-member ensemble | genuine hybrid | **0.5879** |
-| `v68`: trained with the 5 IL-TUR IT test documents (TA-permitted, disclosed) | test-document labels in training | 0.6707 |
+| `v68`: trained with the 5 IL-TUR IT test documents (TA-permitted, disclosed) | test-document labels in training | **0.6707**, rank 4 (graded entry) |
 
 The data is IL-TUR `rr` (Malik et al., 2022), whose test split carries gold labels. It was not
 used until the course TA, asked explicitly on 2026-10-15, permitted training on it. Runs that

@@ -16,7 +16,7 @@ never downloaded.
 | `stack_new`: gradient-boosted stack over lexical, passage and dense members | hybrid | 0.4241 |
 | `ot2_zst3_p`: transductive Sinkhorn decoding of the saved stacks | hybrid | 0.4536 |
 | `cit_abd`: + citator-graph rules from the judgments' own headers | hybrid, no corpus lookup | 0.4979 |
-| `cit_abdl_ot2_zst3_p`: + Phase-1 corpus lookup of masked citations | lookup | **0.5157** (graded entry) |
+| `cit_abdl_ot2_zst3_p`: + Phase-1 corpus lookup of masked citations | lookup | **0.5157**, rank 2 (graded entry) |
 
 ## Architecture
 

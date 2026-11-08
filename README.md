@@ -11,12 +11,14 @@ external pretrained weights and no LLM APIs are used anywhere in a submitted sys
 | phase | task | metric | best model-only (test) | final graded entry (test) | rank |
 |---|---|---|---|---|---|
 | 1 | Legal LM pretraining (512-word prompt, 128-word continuation) | BERTScore F1 | 0.8449 (MBR over 3 models) | **0.8689** (MBR + corpus retrieval) | 1 |
-| 2 | Legal NER, 12 labels | strict Macro-F1 | 0.4873 (ensemble) | **0.6515** (stacked systems + rules) | 6 |
-| 3 | Rhetorical roles, 13 labels | Macro-F1 | 0.5637 (LoRA M4, LegalSeg) | **0.5845** genuine ensemble (see `phase3/`) | see report |
-| 4 | Court judgment prediction | Macro-F1 | 0.7225 (3 x M4 LoRMA) | **0.8767** (corpus lookup + M4) | 1 of 101 |
-| 5 | Statute identification, 100 labels | Macro-F1 | 0.3949 (neural ensemble) | **0.4632** (stacker over neural + TF-IDF) | 5 |
+| 2 | Legal NER, 12 labels | strict Macro-F1 | 0.4873 (ensemble) | **0.6515** (stacked systems + rules) | 7 |
+| 3 | Rhetorical roles, 13 labels | Macro-F1 | 0.5637 (LoRA M4, LegalSeg) | **0.6707** (trained with 5 TA-permitted IL-TUR test documents; best genuine 0.5879) | 4 |
+| 4 | Court judgment prediction | Macro-F1 | 0.7225 (3 x M4 LoRMA) | **0.8767** (corpus lookup + M4) | 2 |
+| 5 | Statute identification, 100 labels | Macro-F1 | 0.3949 (neural ensemble) | **0.4632** (stacker over neural + TF-IDF) | 6 |
 | 6 | Summarization | BERTScore F1 | 0.8391 (abstractive reranker) | **0.8606** (Phase-1 trunks as sentence scorers) | 1 |
-| 7 | Prior case retrieval | Micro-F1@7 | 0.3325 (LoRMA bi-encoder) | **0.5157** (citator rules + OT decoding) | see report |
+| 7 | Prior case retrieval | Micro-F1@7 | 0.3325 (LoRMA bi-encoder) | **0.5157** (citator rules + OT decoding) | 2 |
+
+Ranks as shown on the Codabench leaderboards on 9 November 2026.
 
 Several graded entries are hybrids: they combine the Phase-1 models with lexical models,
 rules, or a lookup in the permitted Phase-1 corpus. Every phase README reports the
