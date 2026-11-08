@@ -87,9 +87,3 @@ its train/dev data for copies of test documents before training and drops them.
 
 Datasets, checkpoints, caches and submission zips are not in this repository. They are on
 the author's Google Drive (`MyDrive/cs781_capstone/`).
-
-## Tooling disclosure
-
-The code and documentation in this repository were written with substantial help from an
-LLM coding assistant (Claude, Anthropic). The LLM usage declaration in the final report
-states exactly how it was used.

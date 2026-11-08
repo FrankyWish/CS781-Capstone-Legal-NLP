@@ -19,7 +19,7 @@ tools/evaluators/
 # abandoned first Phase-1 attempt (5 GB of runs)
 phase1/archive/
 
-# internal planning notes and assistant prompts, not documentation
+# internal planning notes, not documentation
 **/PROMPT.md
 **/REDESIGN_PROMPT.md
 **/HANDOFF.md

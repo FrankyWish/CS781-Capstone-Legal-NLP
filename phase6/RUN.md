@@ -226,7 +226,7 @@ cd /content/drive/MyDrive/cs781_capstone/phase6/code && bash p6.sh status
 tail -40 /content/drive/MyDrive/cs781_capstone/phase6/logs/queue.txt
 ```
 Or, if the runtime is gone, open `phase6/logs/queue.txt` and `phase6/SUBMIT_ORDER.md`
-in Drive. Paste both to Claude.
+in Drive. Keep both for the log.
 
 Uploads: `phase6/submissions/_upload/submission_<tag>.zip`, in `SUBMIT_ORDER.md`
 order. Caps are 40/day and 160 total.
