@@ -33,7 +33,7 @@ train plus the other three dev folds, and test by train plus all of dev, so dev 
 training data without any dev document scoring itself.
 
 **Stacker** (`phase5_stack.py`). A histogram gradient-boosted classifier over (document,
-candidate statute) rows for each document's top 25 candidates. Features: every member's
+candidate statute) rows for each document's top 25 to 35 candidates (`--k`). Features: every member's
 per-label z-score and rank, member agreement, statute frequency, and co-occurrence support
 P(j|k)p(k) from the other candidates. 4-fold out-of-fold on dev; test uses the mean of the
 fold models.

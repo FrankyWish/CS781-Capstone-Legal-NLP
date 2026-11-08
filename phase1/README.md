@@ -105,4 +105,4 @@ split are byte-reproducible; training is reproducible up to cuDNN non-determinis
 | `sft_phase1.py` | task-format SFT (null result) |
 
 Details and every number: [`EXPERIMENTS.md`](EXPERIMENTS.md). Design rationale:
-[`DESIGN.md`](DESIGN.md). All 16 uploads: [`submissions/README.md`](submissions/README.md).
+[`DESIGN.md`](DESIGN.md). All 16 builds (15 uploaded): [`submissions/README.md`](submissions/README.md).
