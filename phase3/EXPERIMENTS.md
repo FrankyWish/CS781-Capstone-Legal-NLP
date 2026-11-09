@@ -174,11 +174,9 @@ the 0.02 is partly fitted to these 10 documents.
 
 ---
 
-### 2.2 IL-TUR `rr` test split as training data (disclosed)
+### 2.2 IL-TUR `rr` test split as training data
 
-Phase-3's data is IL-TUR's `rr` task, whose test split carries gold labels. It was not used until the course TA, asked
-explicitly on 2026-10-15 whether training on IL-TUR `rr` *including its test split* is permitted, replied: "Yes. you
-can do it, as prof clearly mentioned in the class." From then on, `phase3_iltur.py` adds the IL-TUR test-split
+Phase-3's data is IL-TUR's `rr` task, whose test split carries gold labels. From 2026-10-15, `phase3_iltur.py` adds the IL-TUR test-split
 documents (with their labels) to every fold's training data; only training uses them, and predictions still come from
 the trained models. CV stays honest because only the test split is added (IL-TUR train/dev duplicate our folds).
 
@@ -251,7 +249,7 @@ word-feature classifier memorises seen sentences more tightly than a fine-tuned 
 the study as designed but not scored, or drop the table.
 
 **Final state of the submission list (checked 2026-10-20):** `lex_il10` (0.9020) and `lora_M4_lseg_il10` (0.8341) no
-longer appear in it. The highest remaining submission is `v68` (0.6707, half the test set, disclosed); the best
+longer appear in it. The highest remaining submission is `v68` (0.6707, half the test set); the best
 genuine one is `v46` (0.5879) or `v54` (0.5845). [___ state which entry stood at the deadline and why the all-10
 submissions were removed.]
 

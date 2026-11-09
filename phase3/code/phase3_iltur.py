@@ -3,11 +3,8 @@
 
     python phase3_iltur.py
 
-PERMISSION. Training on IL-TUR `rr` including its test split was explicitly
-permitted by the course TA on 2026-10-15 ("Yes. you can do it, as prof clearly
-mentioned in the class"), in reply to a question naming the test split. The
-report must say so, and must give the model-only result (0.5458, trained
-without IL-TUR) beside any number from models trained with it.
+REPORTING. Any number from models trained with this data is reported beside
+the model-only result (0.5458, trained without IL-TUR).
 
 What this does:
   1. downloads the six rr parquet files (CL/IT x train/dev/test)
@@ -243,8 +240,7 @@ def main():
     # Written: every record that does NOT duplicate one of our own labelled
     # (train/dev) documents. Duplicates are left out because adding them would
     # leak each CV fold's held-out documents into its training data. What remains
-    # is (a) the test-split records that match our test documents (the use the
-    # TA permitted) and (b) records matching nothing of ours -- in the 2021
+    # is (a) the test-split records that match our test documents and (b) records matching nothing of ours -- in the 2021
     # release, all 50 CL documents are different judgments from the
     # competition's, i.e. plain extra labelled data.
     lab_g = {d: g for d, g in cg.items() if docs[d]["split"] != "test" and g}
