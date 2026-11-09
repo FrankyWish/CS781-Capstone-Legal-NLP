@@ -37,7 +37,7 @@ A length model was also tested and worked better than using a fixed target lengt
 | `nsel` (M1 + M2 trunks as sentence scorers) | +0.0075 ± 0.0007 | 0.8596 |
 | `nsel4` (all four trunks) | +0.0001 ± 0.0004 | 0.8606 |
 
-Several other approaches did not work as well. Hybrids of neural and extractive output got a best dev score of 0.8541. A neural opening stitched onto extraction moved test from 0.8449 to 0.8518. Selecting input sentences for the neural model scored 0.8347, compared to 0.8403 for plain truncation.
+Several other approaches did not work as well. Hybrids of neural and extractive output got a best dev score of 0.8541. A neural opening stitched onto extraction scored 0.8449 to 0.8518 on test, all below `bsel` at 0.8546. Selecting input sentences for the neural model scored 0.8347, compared to 0.8403 for plain truncation.
 
 Training only on the part of the summary that BERTScore reads also did not help. ROUGE-utility MBR over all candidates mostly selected the extractive member, doing so for 188 out of 200 documents. A word-level score in `bsel` gave +0.0025 on held-out data but -0.0007 on test.
 
