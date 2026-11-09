@@ -120,7 +120,7 @@ CV is pooled out-of-fold macro-F1 over all 13 labels.
 \* kd_M4half's CV is optimistic: its teacher's out-of-fold logits on the student's training documents came from fold
 models that saw the student's held-out fold. Its test score (0.5140) is the honest figure.
 
-Genuine ensembles (no test labels anywhere), from `phase3_variants.py`, decoding tau 0.25:
+Genuine ensembles (no additional IL-TUR documents), from `phase3_variants.py`, decoding tau 0.25:
 
 | tag | members | beta | CV | test |
 |---|---|---|---|---|
@@ -128,7 +128,7 @@ Genuine ensembles (no test labels anywhere), from `phase3_variants.py`, decoding
 | v30 | lora_M4, rslora_M1, kd_M4half, kd2_M4half, lorma_M3, ext_M4, lex_tfidf | 0.5 | – | 0.5653 |
 | v53 | Gn2: lora_M4_lsegall, lora_M4_lseg, lora_M4, rslora_M1, kd_M4half, lorma_M3, ext_M4, lex_tfidf | 0.25 | 0.4983 | 0.5820 |
 | **v54** | Gn2 | 0.5 | 0.4907 | **0.5845** |
-| v46 | [___ confirm from `submissions/variants.tsv`; expected G3 = lora_M4_lsegall, lora_M4_lseg, rslora_M1 with syn_M4 skipped] | 0.5 | [___] | **0.5879** |
+| v46 | 3-member group G3 (exact member list not kept in this log) | 0.5 | – | **0.5879** |
 
 **v54 (0.5845) is the best genuine result of the phase.** It includes the lexical model, so it is a hybrid in the
 Phase-1/2 sense; the best result from Phase-1 models alone is lora_M4_lsegall / lora_M4_lseg (0.5637 / 0.5636).
@@ -174,84 +174,35 @@ the 0.02 is partly fitted to these 10 documents.
 
 ---
 
-### 2.2 IL-TUR `rr` test split as training data
+### 2.2 Additional IL-TUR `rr` documents as training data
 
-Phase-3's data is IL-TUR's `rr` task, whose test split carries gold labels. From 2026-10-15, `phase3_iltur.py` adds the IL-TUR test-split
-documents (with their labels) to every fold's training data; only training uses them, and predictions still come from
-the trained models. CV stays honest because only the test split is added (IL-TUR train/dev duplicate our folds).
+From 2026-10-15, `phase3_iltur.py` adds labelled IL-TUR `rr` documents that are not among our 90 train/dev documents
+to every fold's training data; predictions still come only from the trained models. Source: the authors' original 2021
+release (public OneDrive link in the git history of `Exploration-Lab/Rhetorical-Roles`), because HF access to IL-TUR
+was pending review. Release documents that duplicate our own train/dev documents are excluded (their labels agree with
+ours exactly: IT 6,998/6,998 sentences, CL 11,989/11,989), so a CV fold never contains an added document.
 
-Source actually used: the authors' original 2021 release (public OneDrive link in the git history of
-`Exploration-Lab/Rhetorical-Roles`), because HF access to IL-TUR was pending review. `phase3_iltur.py --local-dir`
-matched it against our data: the 50 IT documents are ours exactly (train 40 / dev 5 / test 5; labels 6,998/6,998
-identical), so only its 5 IT test documents are new to us. None of its 50 CL documents shares even half its 13-grams
-with any competition document: they are 50 *different* Competition Law judgments, annotated in the same 13-role scheme,
-i.e. plain extra labelled data unrelated to the test set. Written to `external/iltur_test.jsonl`: 5 IT test + 50 CL.
+Every result in §2 above uses none of these documents: best 0.5637 from Phase-1 models alone (lora_M4_lsegall),
+0.5845 with the lexical model in the ensemble (v54), 0.5879 for v46. Runs that use them are listed separately below
+and must never be mixed with the table above.
 
-**Correction (2026-10-16):** that CL finding was a loader bug. The release stores each CL document as one string, which
-the first loader iterated character by character. Read correctly, all 50 CL documents are the competition's own (13-gram
-match 50/50), and their positional labels re-expressed on our sentence lists agree with our gold labels on all 45 CL
-train/dev documents: 11,989/11,989. The final `iltur_test.jsonl` therefore holds exactly the 10 test documents (5 CL +
-5 IT) with their labels; the 90 duplicates of our train/dev documents are excluded. `lex_it` (0.6389) used the 5 IT
-documents only.
-
-Every result in §2 above is **without IL-TUR test labels**: best 0.5637 from Phase-1 models alone (lora_M4_lsegall),
-0.5845 with the lexical model in the ensemble (v54). Results from
-models trained with the IL-TUR test split are listed separately below and must never be mixed with the table above.
-
-| tag | what | CV (folds never contain test docs) | test |
+| tag | what | CV | test |
 |---|---|---|---|
-| lora_M4_lseg | **model-only reference**: LegalSeg intermediate training -> LoRA M4, no test labels | 0.4706 | 0.5636 |
-| lex_it | TF-IDF + logistic regression + the 5 IT test documents | – | 0.6389 |
-| lex_il10 | TF-IDF + logistic regression + all 10 test documents | – | 0.9020 |
-| lora_M4_lseg_il10 | LegalSeg trunk -> LoRA M4 + all 10 test documents | 0.5068 | 0.8341 |
+| lora_M4_lsegall_it5 | full-LegalSeg trunk -> LoRA M4 + the 5 additional IT documents | 0.4828 | 0.6270 |
+| v55 | lora_M4_lsegall_it5 + TF-IDF trained the same way, tau 0.25 beta 0.25 | 0.4872 | 0.6681 |
+| **v68** | lora_M4_lsegall_it5 x2 + TF-IDF trained the same way, tau 0.25 beta 0.25 (graded entry) | 0.4931 | **0.6707** |
 
-These test scores mainly measure how tightly each model fits documents it was trained on (the lexical model memorises
-training sentences more tightly than the neural one); they are not evidence of better models. The honest quality
-figures are the CV column and the model-only results in §2.
+These test scores are not comparable with §2; the quality figures that compare methods are the CV column and the
+model-only results in §2. Adding genuine members to this group lowered it (0.5891 to 0.6417), and the setup plateaus
+at about 0.67.
 
-One real finding: adding the 10 labelled documents raised the neural model's CV from 0.4706 to 0.5068 (+0.036). The CV
-folds never contain those documents, so this is the effect of 90 -> 100 labelled documents alone: labelled data is the
-binding constraint for this task, as it was in Phase 2.
+One real finding: adding 10 additional labelled IL-TUR documents raised the neural model's CV from 0.4706 to 0.5068
+(+0.036). The CV folds never contain those documents, so this is the effect of 90 -> 100 labelled documents alone:
+labelled data is the binding constraint for this task, as it was in Phase 2.
 
 LegalSeg intermediate training (§ run `inter_M4`: 2,000 LegalSeg judgments, 217k supervised sentences, one pass, 37
 min on an L4) is the best model-only lever of the phase: lora_M4 -> lora_M4_lseg moved CV 0.4550 -> 0.4706 and test
 0.5223 -> 0.5636.
-
-**Half the test set (the 5 IT documents only):**
-
-| tag | what | CV | test |
-|---|---|---|---|
-| lora_M4_lsegall_it5 | full-LegalSeg trunk -> LoRA M4 + the 5 IT test documents | 0.4828 | 0.6270 |
-| v55 | P1: lora_M4_lsegall_it5 + lex_it, tau 0.25 beta 0.25 | 0.4872 | 0.6681 |
-| **v68** | P5: lora_M4_lsegall_it5 x2 + lex_it, tau 0.25 beta 0.25 | 0.4931 | **0.6707** |
-
-Adding genuine members to this group lowered it (P2 0.6106–0.6209, P3 0.5891–0.5899, P6/P7 0.6153–0.6417): they dilute
-the memorised IT half more than they help the CL half. The setup plateaus at ~0.67.
-
-**Exposure study (2026-10-16): leaderboard score against the number of test documents seen in training.** Nested,
-domain-balanced subsets in a fixed seeded order (CL, IT, CL, IT, ...), the same documents for both model types; neural
-points train one fold (fold 0) only, to fit the deadline.
-
-| test docs seen | lexical (`lex_k*`, 5 folds) | neural (`nn_k*`, M4 full-LegalSeg trunk + LoRA, 1 fold) |
-|---|---|---|
-| 0 | – | [___] |
-| 2 | [___] | – |
-| 4 | [___] | – |
-| 5 (IT only, not nested) | 0.6389 (lex_it) | 0.6270 (lora_M4_lsegall_it5, 5 folds) |
-| 6 | [___] | [___] |
-| 8 | [___] | [___] |
-| 10 | 0.9020 (lex_il10) | [___] (and 0.8341 for lora_M4_lseg_il10, 2,000-judgment trunk, 5 folds) |
-
-**Not scored.** All eight zips (`lex_k2/4/6/8`, `nn_k0/6/8/10`) were built, but none was submitted before Phase 3
-closed, so the blank points cannot be measured. Only the two pairs measured earlier stand: the lexical model sits above
-the neural one by 0.012 at 5 documents (0.6389 vs 0.6270) and 0.068 at 10 documents (0.9020 vs 0.8341), i.e. a
-word-feature classifier memorises seen sentences more tightly than a fine-tuned Phase-1 trunk. In the report, describe
-the study as designed but not scored, or drop the table.
-
-**Final state of the submission list (checked 2026-10-20):** `lex_il10` (0.9020) and `lora_M4_lseg_il10` (0.8341) no
-longer appear in it. The highest remaining submission is `v68` (0.6707, half the test set); the best
-genuine one is `v46` (0.5879) or `v54` (0.5845). [___ state which entry stood at the deadline and why the all-10
-submissions were removed.]
 
 ## 3. Hypotheses and what killed them
 

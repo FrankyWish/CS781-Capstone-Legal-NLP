@@ -23,6 +23,7 @@ Some of the final submissions are not just neural models. They also use lexical 
 ```text
 capstone_Project/
 ├── README.md            this file
+├── report/              final report (PDF and LaTeX source)
 ├── tools/               submission validator + ledger, dev-split builder, parameter counter
 ├── phase1/              pretraining: tokenizer, corpus, four architectures, decoding, MBR, retrieval
 ├── phase2/ … phase7/    one folder per downstream task
