@@ -126,3 +126,5 @@ Every run saves its out-of-fold logits, test logits, CRF parameters and per-epoc
 | `phase3_stack.py`, `phase3_dapt.py`, `phase3_predict.py` | stacking (failed), continued pretraining (failed), teacher labelling |
 
 The full experiment log, including the failed experiments and their results, is available in `EXPERIMENTS.md`.
+
+Every upload: [`submissions/INDEX.md`](https://github.com/FrankyWish/CS781-Capstone-Legal-NLP/blob/main/phase3/submissions/INDEX.md).
