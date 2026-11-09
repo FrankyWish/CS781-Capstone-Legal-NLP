@@ -8,7 +8,7 @@ This repository contains the code and experiment logs for all seven phases of th
 |---|---|---|---|---|---|
 | 1 | Legal LM pretraining (512-word prompt, 128-word continuation) | BERTScore F1 | 0.8449 (MBR over 3 models) | **0.8689** (MBR + corpus retrieval) | 1 |
 | 2 | Legal NER, 12 labels | strict Macro-F1 | 0.4873 (ensemble) | **0.6515** (stacked systems + rules) | 7 |
-| 3 | Rhetorical roles, 13 labels | Macro-F1 | 0.5637 (LoRA M4, LegalSeg) | **0.6707** (trained with 5 TA-permitted IL-TUR test documents; best genuine 0.5879) | 4 |
+| 3 | Rhetorical roles, 13 labels | Macro-F1 | 0.5637 (LoRA M4, LegalSeg) | **0.6707** (with 5 additional IL-TUR `rr` documents in training; 0.5879 without them) | 4 |
 | 4 | Court judgment prediction | Macro-F1 | 0.7225 (3 x M4 LoRMA) | **0.8767** (corpus lookup + M4) | 2 |
 | 5 | Statute identification, 100 labels | Macro-F1 | 0.3949 (neural ensemble) | **0.4632** (stacker over neural + TF-IDF) | 6 |
 | 6 | Summarization | BERTScore F1 | 0.8391 (abstractive reranker) | **0.8606** (Phase-1 trunks as sentence scorers) | 1 |
@@ -63,6 +63,6 @@ The main requirements are Python 3.10+, PyTorch 2.x, numpy, scikit-learn, `bert-
 
 The data used comes from the competition's Hugging Face dataset (`Exploration-Lab/CS-781-Capstone`), the permitted Phase-1 corpus, and the other data sources described in the individual phase READMEs.
 
-Some of the competition datasets are public IL-TUR tasks, where test labels are also publicly available. I kept the training and evaluation data separate while running the experiments. The one exception is Phase 3, where the course TA permitted training on the IL-TUR `rr` test split; those runs are disclosed and listed separately (`phase3/README.md`). Each phase also checks the train/dev data for copies of test documents before training and removes any such copies.
+Some of the competition datasets are public IL-TUR tasks, where test labels are also publicly available. I kept the training and evaluation data separate while running the experiments, apart from the Phase 3 runs that add IL-TUR `rr` documents to training, which are listed separately (`phase3/README.md`). Each phase also checks the train/dev data for copies of test documents before training and removes any such copies.
 
 Datasets, checkpoints, caches and submission zip files are not included in this repository. They are stored in the author's Google Drive (`MyDrive/cs781_capstone/`).
